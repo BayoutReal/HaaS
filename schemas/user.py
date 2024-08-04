@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 from typing import List
 
 from schemas.health_data import HealthDataRead
@@ -6,7 +6,7 @@ from schemas.health_data import HealthDataRead
 
 class UserBase(BaseModel):
     username: str
-    email: str
+    email: EmailStr
 
 class UserCreate(UserBase):
     password: str
