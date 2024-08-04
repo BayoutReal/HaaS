@@ -1,12 +1,22 @@
 from pydantic import BaseModel
+from typing import List
 
-class UserCreate(BaseModel):
+from schemas.health_data import HealthDataRead
+
+
+class UserBase(BaseModel):
+    username: str
     email: str
+
+class UserCreate(UserBase):
     password: str
 
-class UserRead(BaseModel):
+class UserRead(UserBase):
     id: int
-    email: str
+    is_active: bool
 
     class Config:
         orm_mode = True
+
+class UserWithHealthData(UserRead):
+    health_data: List[HealthDataRead] = []

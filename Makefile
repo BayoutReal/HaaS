@@ -1,14 +1,16 @@
 # Name of the virtual environment
-VENV = .venv
+VENV := .venv
 
 # Path to the Python interpreter in the virtual environment
-PYTHON = $(VENV)/bin/python
+PYTHON := $(VENV)/bin/python
 
 # Path to pip in the virtual environment
-PIP = $(VENV)/bin/pip
+PIP := $(VENV)/bin/pip
 
 # Name of the main module of the project
-MODULE = fastapi_project.main:app
+MODULE := api.main:app
+
+.PHONY: install venv run format lint test clean docker-build docker-up docker-down docker-clean default
 
 # Default command to install dependencies
 install:
@@ -69,5 +71,3 @@ docker-clean:
 
 # Default command
 default: venv
-
-.PHONY: install venv run format lint test clean docker-build docker-up docker-down docker-clean default

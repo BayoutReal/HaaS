@@ -7,9 +7,11 @@ class HealthService:
         self.db = db
 
     def create_health_data(self, health_data: HealthDataCreate):
-        db_health_data = HealthData(user_id=health_data.user_id, steps=health_data.steps, sleep_hours=health_data.sleep_hours)
+        db_health_data = HealthData(**health_data.dict())
         self.db.add(db_health_data)
         self.db.commit()
         self.db.refresh(db_health_data)
         return db_health_data
 
+    def get_health_data(self, user_id: int, skip: int = 0, limit: int = 100):
+        return self.db.query(HealthData).filter(HealthData.user_id == user_id).offset(skip).limit(limit).all()

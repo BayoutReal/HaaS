@@ -1,15 +1,17 @@
+# schemas/health_data.py
 from pydantic import BaseModel
+from datetime import datetime
 
 class HealthDataCreate(BaseModel):
     user_id: int
     steps: int
+    heart_rate: float
+    calories_burned: float
     sleep_hours: float
+    timestamp: datetime
 
-class HealthDataRead(BaseModel):
+class HealthDataRead(HealthDataCreate):
     id: int
-    user_id: int
-    steps: int
-    sleep_hours: float
 
     class Config:
         orm_mode = True
